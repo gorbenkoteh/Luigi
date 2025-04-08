@@ -1,9 +1,13 @@
 import luigi
-import sys
 
-class MyTask(luigi.Task):
+class HelloWorldTask(luigi.Task):
     def run(self):
-        print("Hello from Luigi!")
+        print("Executing HelloWorldTask")
+        with self.output().open('w') as f:
+            f.write("Hello, Luigi!")
+
+    def output(self):
+        return luigi.LocalTarget("hello_world.txt")
 
 if __name__ == '__main__':
-    luigi.run(sys.argv)
+    luigi.run()
