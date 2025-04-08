@@ -28,11 +28,8 @@ class DownloadDataset(luigi.Task):
         output_path = Path(self.output().path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         
-        url = (
-            f"ftp://ftp.ncbi.nlm.nih.gov/geo/series/"
-            f"{self.dataset_id[:6]}nnn/{self.dataset_id}/suppl/"
-            f"{self.dataset_id}_RAW.tar"
-        )
+        # Фиксированный URL для GSE68849
+        url = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE68849&format=file"
 
         try:
             logger.info(f"Downloading dataset {self.dataset_id} from {url}")
